@@ -502,10 +502,10 @@ python manage.py createsuperuser
 + 配置path（settings.py）
 
   ```
-  'middleware.middleware.MW'
+  'middleware.middleware.middleware_class_name'
   ```
 
-+ 使用
++ 使用（middleware/middleware.py）
 
   ```python
   from django.utils.deprecation import MiddlewareMixin
@@ -556,6 +556,144 @@ previous_page_number
 ```
 
 
+
+## 文件下载
+
+```python
+response = HttpResponse(content_type='text/csv')
+response['Content-Disposition'] = 'attachment; filename="file_name.csv"'
+writer = csv.writer(response)
+writer.writerow(list_content)
+```
+
+
+
+## 内建用户系统
+
++ 创建用户
+
+  ```
+  user = User.objects.create_user()
+  
+  user = User.objects.create_superuser()
+  ```
+
++ 删除用户
+
+  ```
+  user = User.objects.get(key=value)
+  user.is_active = False
+  user.save()
+  ```
+
++ 校验密码
+
+  ```
+  user = authenticate(username=username, password=password)  # 返回user对象/None
+  ```
+
++ 修改密码
+
++ 登录状态保存
+
+  ```
+  user = authenticate(username=username, password=password)
+  login(request, user)
+  ```
+
++ 登录状态校验
+
+  ```
+  @login_required
+  ```
+
+  配置（settings.py）
+
+  ```
+  # 未登录情况下的跳转地址
+  LOGIN_URL = '/login/'
+  ```
+
++ 登录状态取消
+
+  ```
+  logout(request)
+  ```
+
++ 扩展字段
+
+  > 配置（settings.py）
+  >
+  > ```
+  > AUTH_USER_MODEL = 'app.model_class_name'
+  > ```
+  >
+  > 继承
+  >
+  > ```
+  > class UserNew(AbstractUser):
+  > ```
+
+
+
+## 文件上传
+
++ 表单<form>
+
+  ```
+  enctype="multipart/form-data"
+  ```
+
++ 配置（settings.py）
+
+  ```
+  MEDIA_URL = '/media/'
+  MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+  ```
+
++ 添加路由（主urls.py）
+
+  ```
+  urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+  ```
+
++ ORM 字段 
+
+  FileField(upload_to='子目录名')
+
+
+
+## 邮件
+
+SMTP 推送
+
+IMAP 拉取
+
+POP3 拉取
+
++ 配置（settings.py）
+
+  ```
+  EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+  EMAIL_HOST = 'smtp.qq.com'
+  EMAIL_PORT = 25
+  EMAIL_HOST_USER = 'xxxx@qq.com'
+  EMAIL_HOST_PASSWORD = '******'
+  EMAIL_USE_TLS = False
+  ```
+
++ 使用
+
+  ```
+  mail.send_mail(subject='主题', message='内容', from_email='发件人', recipient_list='收件人')
+  
+  # middleware.py 邮件告警
+  class ExceptionMW(MiddlewareMixin):
+  
+      def process_exception(self, request, exception):
+          error = traceback.format_exc()
+          mail.send_mail()
+  ```
 
 
 
