@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<body>
+<div align="center">
+<form action="/login/" method="post">
+    <p>
+        账号登录  <a href="/">首页</a>
+    </p>
+    <p>
+        <input type="text" placeholder="用户名/邮箱/账号" name="username">
+    </p>
+    <p>
+        <input type="password" placeholder="请输入密码" name="password">
+    </p>
+    <p>
+        <input type="checkbox"  name="remember" style="">7天内免登录
+    </p>
+    <p>
+        <input type="submit" value="登录">
+    </p>
+</form>
+<p style="color: red">{{ error }}</p>
+</div>
+</body>
+</html>
