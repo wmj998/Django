@@ -1,0 +1,10 @@
+
+
+castlecli --third sany --source /home/workspace/model.zip --token b9f3431a61e1a7cbe7bcc6244a5732e1
+
+
+ls /home/workspace/input/*/*.zip | xargs -n1 unzip -d /home/workspace/data
+
+
+
+castlecli --third sany --source /home/workspace/model.zip --test "/home/workspace/data/fk_train/ /home/workspace/data/fk_train/result.cvs"

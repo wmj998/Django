@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>页面</title>
+</head>
+<body>
+<a href="/download/">下载</a>
+{% for page in now_page %}
+    {{ page }}
+{% endfor %}
+<div>
+{% if now_page.has_previous %}
+    <a href="/page?page={{ now_page.previous_page_number }}">上一页</a>
+{% else %}
+    上一页
+{% endif %}
+
+{% for number in paginator.page_range %}
+{% if number == now_page.number %}
+    {{ number }}
+{% else %}
+    <a href="/page?page={{ number }}">{{ number }}</a>
+{% endif %}
+{% endfor %}
+
+{% if now_page.has_next %}
+    <a href="/page?page={{ now_page.next_page_number }}">下一页</a>
+{% else %}
+    下一页
+{% endif %}
+</div>
+</body>
+</html>
