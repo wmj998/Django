@@ -371,8 +371,10 @@ python manage.py createsuperuser
   > + 反向查询
   >
   >   ```
-  >   obj = Model.objects.get(属性=值)
-  >   result = obj.Model(小写)_set.查询方法
+  >   obj = Model.objects.get(属性=值)  # 一
+  >   
+  >   result = obj.Model(小写)_set.all()  # 多
+  >   result = Model.objects.filter(ForeignKey_name==obj)
   >   ```
 
 + 多对多
@@ -542,6 +544,7 @@ num_pages
 page_range
 per_page  # 每页数据个数
 
+
 page = paginator.page(页码)  # 返回Page对象
 
 # 属性
@@ -638,7 +641,7 @@ writer.writerow(list_content)
 
 ## 文件上传
 
-+ 表单<form>
++ 表单<form>（html）
 
   ```
   enctype="multipart/form-data"
@@ -684,7 +687,7 @@ POP3 拉取
 
 + 使用
 
-  ```
+  ```python
   mail.send_mail(subject='主题', message='内容', from_email='发件人', recipient_list='收件人')
   
   # middleware.py 邮件告警
@@ -693,6 +696,7 @@ POP3 拉取
       def process_exception(self, request, exception):
           error = traceback.format_exc()
           mail.send_mail()
+          return HttpResponse()
   ```
 
 
