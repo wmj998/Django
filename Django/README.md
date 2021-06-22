@@ -186,7 +186,7 @@ include('app.urls')
 class Meta:
     db_table = 'table_name'
     verbose_name = 'admin_name'  # 单数
-    verbose_name_plural = verbose_name  # 复数
+    verbose_name_plural = verbose_name  # 复数=单数
 ```
 
 
@@ -309,7 +309,7 @@ python manage.py createsuperuser
 + 注册自定义模型类（admin.py）
 
   ```
-  admin.site.register(Model, [模型类])
+  admin.site.register(Model, 模型管理器类(可选))
   ```
 
 + 模型管理器类（admin.py）
@@ -372,7 +372,7 @@ python manage.py createsuperuser
   >
   >   ```
   >   obj = Model.objects.get(属性=值)  # 一
-  >   
+  >     
   >   result = obj.Model(小写)_set.all()  # 多
   >   result = Model.objects.filter(ForeignKey_name==obj)
   >   ```
