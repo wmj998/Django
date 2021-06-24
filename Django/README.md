@@ -272,7 +272,7 @@ obj.update(属性=值)
 ## 聚合查询
 
 ```
-Model.objects.aggregate(结果变量名=聚合函数('列'))
+result = Model.objects.aggregate(输出结果变量名=聚合函数('列'))
 
 分组聚合
 obj = Model.objects.values('列')
@@ -372,7 +372,7 @@ python manage.py createsuperuser
   >
   >   ```
   >   obj = Model.objects.get(属性=值)  # 一
-  >     
+  >       
   >   result = obj.Model(小写)_set.all()  # 多
   >   result = Model.objects.filter(ForeignKey_name==obj)
   >   ```
