@@ -372,7 +372,7 @@ python manage.py createsuperuser
   >
   >   ```
   >   obj = Model.objects.get(属性=值)  # 一
-  >       
+  >         
   >   result = obj.Model(小写)_set.all()  # 多
   >   result = Model.objects.filter(ForeignKey_name==obj)
   >   ```
@@ -698,6 +698,35 @@ POP3 拉取
           mail.send_mail()
           return HttpResponse()
   ```
+
++ 告警
+
+  > 配置（settings.py）
+  >
+  > ```
+  > ADMINS = [('name', 'email'), ('name', 'email')]
+  > SERVER_EMAIL = 'send_email'
+  > ```
+  >
+  > 过滤敏感信息——局部变量（装饰器放在最上边）
+  >
+  > ```python
+  > @sensitive_variables('user', 'pw', 'cc')
+  >     def process_info(user):
+  >         pw = user.pass_word
+  >         cc = user.credit_card_number
+  >         name = user.name
+  > ```
+  >
+  > 过滤敏感信息——POST
+  >
+  > ```python
+  > @sensitive_post_parameters('username', 'password')
+  >     def index(request):
+  >         s = request.POST['username'] + request.POST['password']
+  > ```
+
+
 
 
 
