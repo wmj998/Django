@@ -372,7 +372,7 @@ python manage.py createsuperuser
   >
   >   ```
   >   obj = Model.objects.get(属性=值)  # 一
-  >         
+  >             
   >   result = obj.Model(小写)_set.all()  # 多
   >   result = Model.objects.filter(ForeignKey_name==obj)
   >   ```
@@ -660,9 +660,18 @@ writer.writerow(list_content)
   urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
   ```
 
-+ ORM 字段 
++ ORM 字段 （models.py）
 
-  FileField(upload_to='子目录名')
+  ```
+  models.FileField(upload_to='子目录名')
+  ```
+  
++ 视图函数（views.py）
+
+  ```
+  file = request.FILES['file']
+  Model.objects.create(file=file)
+  ```
 
 
 
