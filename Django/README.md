@@ -157,7 +157,7 @@ include('app.urls')
 + BooleanField()
 + CharField(max_length)
 + DateField()
-+ DateTimeField(auto_now)
++ DateTimeField(auto_now_add / auto_now) 创建时间 / 更新时间
 + FloatField()
 + DecimaField(max_digits(位数总数), decimal_places(小数点位数))
 + EmailField()
@@ -261,11 +261,15 @@ obj.update(属性=值)
 
 ## F对象和Q对象
 
-+=
++ F对象
 
-+ & 与
-+ | 或
-+ ~ 非
+  +=
+
++ Q对象
+
+  > + & 与
+  > + | 或
+  > + ~ 非
 
 
 
@@ -372,7 +376,7 @@ python manage.py createsuperuser
   >
   >   ```
   >   obj = Model.objects.get(属性=值)  # 一
-  >             
+  >               
   >   result = obj.Model(小写)_set.all()  # 多
   >   result = Model.objects.filter(ForeignKey_name==obj)
   >   ```
