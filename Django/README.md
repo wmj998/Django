@@ -221,6 +221,10 @@ def __str__(self):
 
 查询谓词
 
+```
+(属性__gt=值)
+```
+
 + __exact 等值匹配
 + __contains 包含指定值
 + __startswith
@@ -376,7 +380,7 @@ python manage.py createsuperuser
   >
   >   ```
   >   obj = Model.objects.get(属性=值)  # 一
-  >               
+  >                 
   >   result = obj.Model(小写)_set.all()  # 多
   >   result = Model.objects.filter(ForeignKey_name==obj)
   >   ```
